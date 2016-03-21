@@ -160,8 +160,8 @@ gulp.task('copy', function() {
         .pipe(gulp.dest('build/img/'));
     gulp.src('src/fonts/*.*')
         .pipe(gulp.dest('build/css/fonts/'));
-    gulp.src('src/css/*.*')
-        .pipe(gulp.dest('build/css/'));
+    gulp.src('src/css/**')
+        .pipe(gulp.dest('build/css/lib/'));
     gulp.src('src/video/*.*')
         .pipe(gulp.dest('build/video/'));
 });

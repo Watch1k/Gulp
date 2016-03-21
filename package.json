@@ -1,7 +1,7 @@
 {
   "name": "Watch1k-Project",
   "version": "0.1.0",
-  "description": "AngularApp",
+  "description": "Gulp",
   "author": "Watch1k",
   "devDependencies": {
     "autoprefixer": "^6.0.3",

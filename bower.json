@@ -1,6 +1,6 @@
 {
   "name": "Watch1k-Project",
-  "description": "AngularApp",
+  "description": "Gulp",
   "main": "",
   "authors": [
     "Watch1k"
@@ -16,9 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.2",
-    "slick-carousel": "slick.js#^1.5.9",
-    "owl.carousel": "owl2#^0.1.0"
-  },
-  "devDependencies": {}
+    "slick-carousel": "^1.5.9",
+    "jquery": "^1.12.2",
+    "owl.carousel": "owl2#^0.1.0",
+    "wow": "wowjs#^1.1.2"
+  }
 }

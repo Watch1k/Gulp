@@ -1,0 +1,21 @@
+//- block navToggle
+//- 	- var headToggle = ''
+//- -var headMenu = ['Babes', 'Lifestyle', 'Entertainment']
+//- -var icons = ['babes', 'lifestyle', 'entertainment']
+//- header.header.wrap
+//- 	// begin logo
+//- 	.logo
+//- 		a(href="index.html")
+//- 			img(src="img/logo.png" alt="Top Banger")
+//- 	// end logo
+//- 	// begin main-nav
+//- 	nav.main-nav
+//- 		ul
+//- 			each value in headMenu
+//- 				if headToggle === value
+//- 					li.is-active
+//- 						a(href='#' title=value)= value
+//- 				else
+//- 					li
+//- 						a(href='#' title=value)= value
+//- 	// end main-nav

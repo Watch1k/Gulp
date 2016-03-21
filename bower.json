@@ -1,0 +1,24 @@
+{
+  "name": "Watch1k-Project",
+  "description": "AngularApp",
+  "main": "",
+  "authors": [
+    "Watch1k"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2",
+    "slick-carousel": "slick.js#^1.5.9",
+    "owl.carousel": "owl2#^0.1.0"
+  },
+  "devDependencies": {}
+}

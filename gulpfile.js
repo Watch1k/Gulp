@@ -42,6 +42,7 @@ var src = {
     sass: 'src/sass',
     js: 'src/js',
     img: 'src/img',
+    lib: 'src/lib',
     svg: 'src/img/svg',
     helpers: 'src/helpers'
 };

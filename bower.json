@@ -6,8 +6,8 @@
     "Watch1k"
   ],
   "license": "MIT",
+  "homepage": "https://github.com/Watch1k/Gulp",
   "moduleType": [],
-  "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,10 +15,5 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "slick-carousel": "^1.5.9",
-    "jquery": "^1.12.2",
-    "owl.carousel": "owl2#^0.1.0",
-    "wow": "wowjs#^1.1.2"
-  }
+  "dependencies": {}
 }

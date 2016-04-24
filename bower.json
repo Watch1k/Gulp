@@ -1,13 +1,13 @@
 {
   "name": "Watch1k-Project",
-  "description": "AngularApp",
+  "description": "Gulp",
   "main": "",
   "authors": [
     "Watch1k"
   ],
   "license": "MIT",
+  "homepage": "https://github.com/Watch1k/Gulp",
   "moduleType": [],
-  "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,10 +15,5 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "jquery": "^2.2.2",
-    "slick-carousel": "slick.js#^1.5.9",
-    "owl.carousel": "owl2#^0.1.0"
-  },
-  "devDependencies": {}
+  "dependencies": {}
 }

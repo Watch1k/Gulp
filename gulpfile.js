@@ -110,7 +110,7 @@ gulp.task('sprite', function() {
     spriteData.img
         .pipe(gulp.dest(dest.img));
     spriteData.css
-        .pipe(gulp.dest(src.sass));
+        .pipe(gulp.dest(src.sass + '/lib'));
 });
 
 // svg sprite
@@ -157,6 +157,8 @@ gulp.task('js', function() {
 });
 
 gulp.task('copy', function() {
+    gulp.src('src/*.php')
+        .pipe(gulp.dest('build/'));
     gulp.src('src/img/**')
         .pipe(gulp.dest('build/img/'));
     gulp.src('src/fonts/*.*')

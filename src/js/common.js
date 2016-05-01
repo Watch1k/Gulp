@@ -1,4 +1,5 @@
-head.ready(function(){
+/* Common JS */
+$(document).ready(function(){
 
 	// Clear placeholder
 	(function() {

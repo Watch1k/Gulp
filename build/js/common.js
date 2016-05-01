@@ -1,12 +1,14 @@
-head.ready(function(){
+/* Common JS */
+$(document).ready(function(){
 
 	// Clear placeholder
 	(function() {
-		$('input,textarea').focus(function(){
-				$(this).data('placeholder',$(this).attr('placeholder'))
+		var el = $('input, textarea');
+		el.focus(function(){
+				$(this).data('placeholder',$(this).attr('placeholder'));
 				$(this).attr('placeholder','');
 		});
-		$('input,textarea').blur(function(){
+		el.blur(function(){
 			$(this).attr('placeholder',$(this).data('placeholder'));
 		});
 	}());

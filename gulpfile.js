@@ -19,9 +19,10 @@ var gulp = require('gulp'),
     svgstore = require('gulp-svgstore'),
     svgmin = require('gulp-svgmin'),
     cheerio = require('gulp-cheerio'),
-    coffee = require('gulp-coffee'),
     gutil = require('gulp-util'),
-    notify = require("gulp-notify"),
+    notify = require('gulp-notify'),
+    include = require('gulp-include'),
+    cssmin = require('gulp-cssmin'),
     reload = browserSync.reload;
 
 // IE 8 opacity
@@ -36,7 +37,6 @@ var opacity = function(css, opts) {
     });
 };
 
-// @TODO: move all paths to these variables
 var src = {
     root: 'src',
     sass: 'src/sass',
@@ -47,7 +47,6 @@ var src = {
     helpers: 'src/helpers'
 };
 
-//** dest paths **
 var dest = {
     root: 'build',
     html: 'build',
@@ -83,16 +82,10 @@ gulp.task('sass', function() {
             console.error('Error', err.message);
         })
         .pipe(postcss(processors))
+        // .pipe(cssmin())
+        // .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('build/css/'));
-});
-
-gulp.task('coffee', function() {
-    gulp.src(src.js + '/*.coffee')
-        // .pipe(sourcemaps.init())
-        .pipe(coffee({bare: true}).on('error', gutil.log, notify("ERROR!!!")))
-        // .pipe(sourcemaps.write())
-        .pipe(gulp.dest(dest.js));
 });
 
 // sprite
@@ -149,6 +142,7 @@ gulp.task('html', function() {
 // js includes
 gulp.task('js', function() {
     gulp.src('src/js/**/*.js')
+        .pipe(include())
         .pipe(rigger())
         .pipe(gulp.dest('build/js/'))
         .pipe(reload({
@@ -156,6 +150,7 @@ gulp.task('js', function() {
         }));
 });
 
+// copy
 gulp.task('copy', function() {
     gulp.src('src/*.php')
         .pipe(gulp.dest('build/'));
@@ -205,7 +200,6 @@ gulp.task('watch', function() {
     gulp.watch('src/jade/**/*.jade', ['jade']);
     gulp.watch(src.sass + '/**/*', ['sass']);
     gulp.watch('src/js/*.js', ['js']);
-    gulp.watch('src/js/*.coffee', ['coffee']);
     gulp.watch('src/img/*', ['sprite', 'copy']);
     gulp.watch('src/img/svg/*', ['svg-sprite']);
     gulp.watch(['src/*.html'], ['html']);
@@ -214,4 +208,4 @@ gulp.task('watch', function() {
 
 
 gulp.task('default', ['browser-sync', 'watch'], function() {gulp.src(dest.root).pipe(notify("Sync"));});
-gulp.task('build', ['jade', 'html', 'sprite', 'svg-sprite', 'copy', 'js', 'coffee', 'sass'], function() {gulp.src(dest.root).pipe(notify("Build"));});
+gulp.task('build', ['jade', 'html', 'sprite', 'svg-sprite', 'copy', 'js', 'sass'], function() {gulp.src(dest.root).pipe(notify("Build"));});

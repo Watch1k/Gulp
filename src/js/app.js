@@ -1,7 +1,5 @@
-head.load(
-	"js/lib/jquery.min.js",
-	// "js/lib/slick.min.js",
-	// "js/lib/wow.min.js",
-	// "js/lib/owl.carousel.min.js",
-	"js/common.js"
-);
+//=include lib/jquery.min.js
+//=include lib/mobile-detect.min.js
+//=include lib/owl.carousel.min.js
+//=include lib/slick.min.js
+//=include common.js

@@ -344,6 +344,40 @@ body {
 /* ==========================================================================
  * Main
  * ========================================================================== */
+.button {
+  position: relative;
+  margin: 100px auto 0;
+  width: 200px;
+  height: 48px;
+  background-color: #ff063f;
+}
+.button:before {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 50%;
+  left: 15%;
+  bottom: 0;
+  z-index: -1;
+  background-color: transparent;
+  -webkit-box-shadow: 0 2px 50px rgba(0, 0, 0, 0.33);
+  -moz-box-shadow: 0 2px 50px rgba(0, 0, 0, 0.33);
+  box-shadow: 0 2px 50px rgba(0, 0, 0, 0.33);
+}
+.button:after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 50%;
+  left: 15%;
+  bottom: 0;
+  z-index: -1;
+  background-color: transparent;
+  -webkit-box-shadow: 0 2px 50px rgba(255, 6, 63, 0.67);
+  -moz-box-shadow: 0 2px 50px rgba(255, 6, 63, 0.67);
+  box-shadow: 0 2px 50px rgba(255, 6, 63, 0.67);
+}
+
 /* ==========================================================================
  * Other Styles
  * ========================================================================== */

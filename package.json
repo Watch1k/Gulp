@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "description": "Gulp",
   "author": "Watch1k",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Watch1k/Gulp.git"
+  },
   "devDependencies": {
     "autoprefixer": "^6.0.3",
     "browser-sync": "^2.9.3",
@@ -28,9 +33,11 @@
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.0.2",
     "gulp.spritesmith": "^6.0.1",
+    "node-sass": "^3.7.0",
     "rimraf": "^2.4.3",
     "sass-loader": "^3.1.2",
-    "susy": "^2.2.12"
+    "susy": "^2.2.12",
+    "webpack": "^1.13.0"
   },
   "dependencies": {}
 }

@@ -4,6 +4,10 @@ var gulp = require('gulp'),
     sass = require('gulp-ruby-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     postcss = require('gulp-postcss'),
+    concat = require('gulp-concat'),
+    merge = require('merge-stream'),
+    streamqueue = require('streamqueue'),
+    include = require('gulp-include'),
     autoprefixer = require('autoprefixer'),
     rigger = require('gulp-rigger'),
     spritesmith = require('gulp.spritesmith'),
@@ -65,6 +69,7 @@ gulp.task('jade', function() {
 
 
 // sass
+// sass
 gulp.task('sass', function() {
     var processors = [
         opacity,
@@ -74,18 +79,23 @@ gulp.task('sass', function() {
         })
     ];
 
-    return sass('src/sass/*.sass', {
+    return streamqueue({ objectMode: true },
+        sass('src/sass/*.sass', {
             sourcemap: true,
-            style: 'expanded'
+            style: 'nested'
         })
-        .on('error', function(err) {
-            console.error('Error', err.message);
-        })
-        .pipe(postcss(processors))
+            .on('error', function(err) {
+                console.error('Error', err.message);
+            })
+            .pipe(postcss(processors))
+            .pipe(rigger())
+            .pipe(sourcemaps.write('./'))
+            .pipe(gulp.dest('build/css/')),
+        gulp.src(src.root + '/css/*.css')
+    )
+        .pipe(concat('screen.css'))
         // .pipe(cssmin())
-        // .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('build/css/'));
+        .pipe(gulp.dest('build/css'))
 });
 
 // sprite
@@ -192,7 +202,7 @@ gulp.task('browser-sync', function() {
         notify: false,
         ghostMode: false,
         online: false,
-        open: true
+        open: false
     });
 });
 
@@ -200,8 +210,8 @@ gulp.task('watch', function() {
     gulp.watch('src/jade/**/*.jade', ['jade']);
     gulp.watch(src.sass + '/**/*', ['sass']);
     gulp.watch('src/js/*.js', ['js']);
-    gulp.watch('src/img/*', ['sprite', 'copy']);
-    gulp.watch('src/img/svg/*', ['svg-sprite']);
+    gulp.watch('src/img/**/*', ['sprite', 'copy']);
+    gulp.watch('src/img/svg/**/*', ['svg-sprite']);
     gulp.watch(['src/*.html'], ['html']);
     gulp.watch(src.img + '/icons/*.png', ['sprite']);
 });

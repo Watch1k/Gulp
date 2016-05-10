@@ -69,7 +69,6 @@ gulp.task('jade', function() {
 
 
 // sass
-// sass
 gulp.task('sass', function() {
     var processors = [
         opacity,

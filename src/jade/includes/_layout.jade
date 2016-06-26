@@ -20,11 +20,8 @@ html
   body
     .wrapper
       include _header
-      ='\n'
       main.main
         block content
-    ='\n'
     include _footer
-    ='\n'
     block js
       script(src="js/app.js")

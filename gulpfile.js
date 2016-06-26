@@ -63,7 +63,7 @@ var dest = {
 gulp.task('jade', function() {
     return gulp.src(['src/jade/**/*.jade', '!src/jade/includes/**/*.jade'])
         .pipe(jade())
-        .pipe(htmlbeautify())
+        .pipe(htmlbeautify({indent_size: 2}))
         .pipe(gulp.dest('build/'));
 });
 

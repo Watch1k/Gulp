@@ -48,7 +48,7 @@ var src = {
     img: 'src/img',
     lib: 'src/lib',
     svg: 'src/img/svg',
-    helpers: 'src/helpers'
+    assets: 'src/assets'
 };
 
 var dest = {
@@ -107,7 +107,7 @@ gulp.task('sprite', function() {
             cssFormat: 'sass',
             padding: 4,
             // algorithm: 'top-down',
-            cssTemplate: src.helpers + '/sprite.template.mustache'
+            cssTemplate: src.assets + '/sprite.template.mustache'
         }));
     spriteData.img
         .pipe(gulp.dest(dest.img));
@@ -121,20 +121,72 @@ gulp.task('svg-sprite', function () {
         .pipe(svgmin({
             js2svg: {
                 pretty: true
-            }
+            },
+            plugins: [{
+                removeDesc: true
+            }, {
+                cleanupIDs: true
+            }, {
+                mergePaths: false
+            }]
         }))
         .pipe(rename({prefix: 'icon-'}))
         .pipe(svgstore({ inlineSvg: true }))
-        .pipe(rename('icons.svg'))
+        .pipe(rename({basename: 'sprite'}))
         .pipe(cheerio({
-            run: function ($) {
-                $('svg').css({'display': 'none'});
-                $('[fill]').removeAttr('fill')
-            },
+            run: extractDataFromIcons,
             parserOptions: { xmlMode: true }
         }))
         .pipe(gulp.dest(dest.img));
 });
+
+function extractDataFromIcons($, file) {
+    // get data about each icon
+    var symbols = $('svg > symbol:not(.original)');
+    var data = symbols.map(function() {
+        var $this = $(this);
+        var size = $this.attr('viewBox').split(' ').splice(2);
+        return {
+            name: $this.attr('id'),
+            height: size[1],
+            ratio: Math.ceil((size[0] / size[1]) * 10) / 10
+        };
+    }).get();
+
+    // remove attributes to make possible applying these styles via css
+    symbols.each(function() {
+        var ind = false;
+        if ($(this).attr('id').indexOf('-original') > -1) {
+            ind = true;
+        }
+        $(this)
+            .children()
+            .removeAttr('stroke')
+            .removeAttr('stroke-width')
+            .removeAttr('opacity');
+        if (!ind) {
+            $(this)
+                .children()
+                .not('[fill="currentColor"]')
+                .removeAttr('fill');
+        }
+    });
+
+    // create scss file with icon dimensions
+    gulp.src('src/assets/_sprite.scss')
+        .pipe(consolidate('lodash', {
+            icons: data
+        }))
+        .pipe(rename({basename: '_svg-sprite'}))
+        .pipe(gulp.dest('src/sass/lib'));
+
+    // create preview
+    gulp.src('src/assets/sprite.html')
+        .pipe(consolidate('lodash', {
+            icons: data
+        }))
+        .pipe(gulp.dest('build'));
+}
 
 // html includes
 gulp.task('html', function() {
@@ -218,7 +270,7 @@ gulp.task('watch', function() {
 
 
 // 'gulp' task
-gulp.task('default', ['browser-sync', 'watch'], function() {
+gulp.task('default', ['watch' , 'browser-sync'], function() {
     gulp.src(dest.root).pipe(notify("Sync"));
 });
 

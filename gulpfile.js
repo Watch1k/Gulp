@@ -252,7 +252,7 @@ gulp.task('browser-sync', function() {
         port: 8080,
         notify: false,
         ghostMode: false,
-        online: false,
+        online: true,
         open: false
     });
 });
@@ -261,7 +261,7 @@ gulp.task('browser-sync', function() {
 gulp.task('watch', function() {
     gulp.watch('src/jade/**/*.jade', ['jade']);
     gulp.watch(src.sass + '/**/*', ['sass']);
-    gulp.watch('src/js/*.js', ['js']);
+    gulp.watch('src/js/**/*.js', ['js']);
     gulp.watch('src/img/**/*', ['sprite', 'copy']);
     gulp.watch('src/img/svg/**/*', ['svg-sprite', 'copy']);
     gulp.watch(['src/*.html'], ['html']);

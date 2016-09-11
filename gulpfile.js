@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
-    sass = require('gulp-ruby-sass'),
+    sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     postcss = require('gulp-postcss'),
     concat = require('gulp-concat'),
@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     autoprefixer = require('autoprefixer'),
     rigger = require('gulp-rigger'),
     spritesmith = require('gulp.spritesmith'),
-    jade = require('gulp-jade'),
+    jade = require('gulp-pug2'),
+		jadelint = require('gulp-pug-lint'),
     browserSync = require("browser-sync"),
     consolidate = require("gulp-consolidate"),
     rimraf = require('rimraf'),
@@ -61,14 +62,13 @@ var dest = {
 
 // jade
 gulp.task('jade', function() {
-    return gulp.src(['src/jade/**/*.jade', '!src/jade/includes/**/*.jade'])
+    return gulp.src(['src/jade/**/*.pug', '!src/jade/includes/**/*.pug'])
+		    .pipe(jadelint())
         .pipe(jade())
         .pipe(htmlbeautify({indent_size: 2}))
         .pipe(gulp.dest('build/'));
 });
 
-
-// sass
 gulp.task('sass', function() {
     var processors = [
         opacity,
@@ -79,22 +79,17 @@ gulp.task('sass', function() {
     ];
 
     return streamqueue({ objectMode: true },
-        sass('src/sass/*.sass', {
-            sourcemap: true,
-            style: 'nested'
-        })
-            .on('error', function(err) {
-                console.error('Error', err.message);
-            })
+        gulp.src('src/sass/*.sass')
+            .pipe(sass({sourcemap: true}).on('error', sass.logError))
             .pipe(postcss(processors))
             .pipe(rigger())
             .pipe(sourcemaps.write('./'))
-            .pipe(gulp.dest('build/css/')),
+            .pipe(gulp.dest('build')),
         gulp.src(src.root + '/css/*.css')
     )
         .pipe(concat('screen.css'))
         // .pipe(cssmin())
-        .pipe(gulp.dest('build/css'))
+        .pipe(gulp.dest('build'));
 });
 
 // sprite
@@ -259,12 +254,11 @@ gulp.task('browser-sync', function() {
 
 // watch
 gulp.task('watch', function() {
-    gulp.watch('src/jade/**/*.jade', ['jade']);
+    gulp.watch('src/jade/**/*.pug', ['jade']);
     gulp.watch(src.sass + '/**/*', ['sass']);
     gulp.watch('src/js/**/*.js', ['js']);
     gulp.watch('src/img/**/*', ['sprite', 'copy']);
     gulp.watch('src/img/svg/**/*', ['svg-sprite', 'copy']);
-    gulp.watch(['src/*.html'], ['html']);
     gulp.watch(src.img + '/icons/*.png', ['sprite']);
 });
 
@@ -272,6 +266,7 @@ gulp.task('watch', function() {
 // 'gulp' task
 gulp.task('default', ['watch' , 'browser-sync'], function() {
     gulp.src(dest.root).pipe(notify("Sync"));
+		gulp.watch('build/**/*.html').on('change', reload);
 });
 
 // 'gulp build' task

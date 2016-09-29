@@ -109,14 +109,14 @@ $browser-context: 16
 	transform: translate(-50%,-50%)
 
 =vertical
-	white-space: nowrap
+	font-size: 0
+	text-align: center
 	&:before
 		content: ""
 		display: inline-block
 		vertical-align: middle
 		width: 0
 		height: 100%
-		margin-right: -0.25em
 
 =hide-text
 	font: 0/0 a
@@ -145,3 +145,19 @@ $browser-context: 16
 	left: 0
 	right: 0
 	bottom: 0
+
+// justify, set on parent
+=justify
+	text-align: justify
+	line-height: 0
+	font-size: 0
+	text-justify: newspaper
+	zoom: 1
+	text-align-last: justify
+	&:after
+		content: ""
+		display: inline-block
+		width: 100%
+		height: 0
+		visibility: hidden
+		overflow: hidden

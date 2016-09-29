@@ -25,7 +25,6 @@ var gulp = require('gulp'),
     svgmin = require('gulp-svgmin'),
     cheerio = require('gulp-cheerio'),
     gutil = require('gulp-util'),
-    notify = require('gulp-notify'),
     include = require('gulp-include'),
     cssmin = require('gulp-cssmin'),
     reload = browserSync.reload;
@@ -84,12 +83,12 @@ gulp.task('sass', function() {
             .pipe(postcss(processors))
             .pipe(rigger())
             .pipe(sourcemaps.write('./'))
-            .pipe(gulp.dest('build')),
+            .pipe(gulp.dest('build/css')),
         gulp.src(src.root + '/css/*.css')
     )
         .pipe(concat('screen.css'))
         // .pipe(cssmin())
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest('build/css'));
 });
 
 // sprite
@@ -223,16 +222,14 @@ gulp.task('copy', function() {
 // delete app
 gulp.task('del', function(cb) {
     rimraf('./build', cb);
-    gulp.src(src.root)
-        .pipe(notify("Delete"));
+    gulp.src(src.root);
 });
 
 // make zip-file
 gulp.task('zip', function() {
     return gulp.src('build/**/*')
         .pipe(zip('build.zip'))
-        .pipe(gulp.dest(''))
-        .pipe(notify("ZIP"));
+        .pipe(gulp.dest(''));
 });
 
 // web server
@@ -265,11 +262,11 @@ gulp.task('watch', function() {
 
 // 'gulp' task
 gulp.task('default', ['watch' , 'browser-sync'], function() {
-    gulp.src(dest.root).pipe(notify("Sync"));
+    gulp.src(dest.root);
 		gulp.watch('build/**/*.html').on('change', reload);
 });
 
 // 'gulp build' task
 gulp.task('build', ['jade', 'html', 'sprite', 'svg-sprite', 'copy', 'js', 'sass'], function() {
-    gulp.src(dest.root).pipe(notify("Build"));
+    gulp.src(dest.root);
 });

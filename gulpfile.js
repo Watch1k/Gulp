@@ -79,7 +79,8 @@ gulp.task('sass', function() {
 
 		return streamqueue({ objectMode: true },
 				gulp.src('src/sass/*.sass')
-						.pipe(sass({sourcemap: true}).on('error', sass.logError))
+						.pipe(sourcemaps.init())
+						.pipe(sass({outputStyle: 'compact'}).on('error', sass.logError))
 						.pipe(postcss(processors))
 						.pipe(rigger())
 						.pipe(sourcemaps.write('./'))

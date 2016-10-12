@@ -6,25 +6,30 @@ $default-fonts: Arial, sans-serif
 // colors
 // $black: #000
 
+=trs
+	transition: all 0.2s
+
 
 /* ===================================
 	 Main Styles
 	 =================================== */
 body
+	position: relative
 	min-width: 320px
+	font-family: $default-fonts
 	font-size: 16px
 	color: #333
 	line-height: 1.42857
 
 .wrapper
+	position: relative
 	overflow: hidden
 	margin: 0 auto
 	min-height: 100%
 	padding-bottom: 40px
 
-.wrap
+.container
 	//+container
-	transition: all 0.3s
 
 
 /* Helpers
@@ -61,6 +66,10 @@ img
 .is-hidden
 	display: none
 
+.vertical
+	display: inline-block
+	vertical-align: middle
+
 .cfx
 	+pie-clearfix
 
@@ -83,18 +92,12 @@ img
 .footer
 	margin-top: -40px
 	height: 40px
-	&__lol
-		margin-top: 10px
-	&__lol2
-		margin-top: 10px
-
-.footer2
-	margin-top: 10px
 
 
 /* ===================================
 	 Main
 	 =================================== */
+.main
 
 
 /* ===================================

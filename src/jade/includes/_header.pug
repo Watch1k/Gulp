@@ -1,24 +1,27 @@
 //block navToggle
-//  - var headToggle = ''
+//	- var headToggle = ''
 //-var headMenu = ['Menu 1', 'Menu 2', 'Menu 3']
 //-var icons = ['name1', 'name2', 'name3']
-//header.header.wrap
-//  // begin logo
-//  .logo
-//    a(href="index.html")
-//      //img(src="img/logo.png" alt="Logo")
-//  // end logo
-//  // begin main-nav
-//  nav.main-nav
-//    ul
-//      -var i = 0
-//      each value in headMenu
-//        if headToggle === value
-//          li.is-active
-//            +icon(icons[i++])
-//            a(href='#' title=value)= value
-//        else
-//          li
-//            +icon(icons[i++])
-//            a(href='#' title=value)= value
-//  // end main-nav
+//header.header
+//	.container
+//		// begin logo
+//		.header__logo.logo
+//			a.logo__link(href="index.html")
+//				img.logo__img(src="img/logo.png" alt="Logo")
+//		// end logo
+//		// begin main-nav
+//		nav.nav
+//			ul.nav__list
+//				-var i = 0
+//				each value in headMenu
+//					if headToggle === value
+//						li.nav__item.is-active
+//							.nav__icon
+//								+i(icons[i++])
+//							a.nav__link(href='#' title=value)= value
+//					else
+//						li.nav__item
+//							.nav__icon
+//								+i(icons[i++])
+//							a.nav__link(href='#' title=value)= value
+//		// end main-nav

@@ -78,14 +78,14 @@ gulp.task('sass', function() {
 		];
 
 		return streamqueue({ objectMode: true },
+				gulp.src(src.root + '/css/*.css'),
 				gulp.src('src/sass/*.sass')
 						.pipe(sourcemaps.init())
 						.pipe(sass({outputStyle: 'compact'}).on('error', sass.logError))
 						.pipe(postcss(processors))
 						.pipe(rigger())
 						.pipe(sourcemaps.write('./'))
-						.pipe(gulp.dest('build/css')),
-				gulp.src(src.root + '/css/*.css')
+						.pipe(gulp.dest('build/css'))
 		)
 				.pipe(concat('screen.css'))
 				// .pipe(cssmin())

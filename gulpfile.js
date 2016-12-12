@@ -213,7 +213,7 @@ gulp.task('copy', function() {
 		gulp.src('src/img/**')
 				.pipe(gulp.dest('build/img/'));
 		gulp.src('src/fonts/*.*')
-				.pipe(gulp.dest('build/css/fonts/'));
+				.pipe(gulp.dest('build/fonts/'));
 		gulp.src('src/css/**')
 				.pipe(gulp.dest('build/css/lib/'));
 		gulp.src('src/video/*.*')
